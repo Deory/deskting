@@ -2,7 +2,8 @@
 import { Controller, Get, Post, Body, Put, Param, Delete } from '@nestjs/common';
 import { SchoolsService } from './schools.service';
 import { CreateSchoolDto } from './dto/create-school.dto';
-// import { UpdateSchoolDto } from './dto/update-school.dto';
+import { MongoIdValidationPipe } from 'src/validation.pipe';
+import { ObjectId } from 'mongoose';
 
 @Controller('schools')
 export class SchoolsController {
@@ -13,23 +14,26 @@ export class SchoolsController {
     return this.schoolsService.create(createSchoolDto);
   }
 
-  // @Get()
-  // findAll() {
-  //   return this.schoolsService.findAll();
-  // }
+  @Get()
+  findAll() {
+    return this.schoolsService.findAll();
+  }
 
-  // @Get(':id')
-  // findOne(@Param('id') id: string) {
-  //   return this.schoolsService.findOne(+id);
-  // }
+  @Get(':id')
+  findOne(@Param('id', MongoIdValidationPipe) id: ObjectId) {
+    return this.schoolsService.findOne(id);
+  }
 
   // @Put(':id')
-  // update(@Param('id') id: string, @Body() updateSchoolDto: UpdateSchoolDto) {
-  //   return this.schoolsService.update(+id, updateSchoolDto);
+  // update(
+  //   @Param('id', MongoIdValidationPipe) id: ObjectId,
+  //   @Body() updateSchoolDto: UpdateSchoolDto,
+  // ) {
+  //   return this.schoolsService.update(id, updateSchoolDto);
   // }
 
   // @Delete(':id')
-  // remove(@Param('id') id: string) {
-  //   return this.schoolsService.remove(+id);
+  // remove(@Param('id', MongoIdValidationPipe) id: ObjectId) {
+  //   return this.schoolsService.remove(id);
   // }
 }
