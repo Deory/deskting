@@ -1,16 +1,33 @@
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
 import { Document } from 'mongoose';
+import { ApiProperty } from '@nestjs/swagger';
 
 export type UserDocument = User & Document;
 
 @Schema()
 export class User {
   @Prop({ required: true })
+  @ApiProperty({
+    example: 'admin',
+    description: '사용자 타입',
+    enum: ['admin', 'student'],
+    required: true,
+  })
   type: USER_TYPE;
 
+  @ApiProperty({
+    example: 'kevin',
+    description: '사용자 이름',
+    required: true,
+  })
   @Prop({ required: true })
   name: string;
 
+  @ApiProperty({
+    example: '123',
+    description: '사용자 비밀번호',
+    required: true,
+  })
   @Prop({ required: true, select: false })
   password: string;
 }
