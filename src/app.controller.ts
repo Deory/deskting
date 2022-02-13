@@ -45,6 +45,6 @@ export class AppController {
   getHelloNameKey(@Param() params: { [key: string]: string }): string {
     return `${params.name || 'somebody'} has ${params.key || 'nothing'}`;
     //path param 으로 들어오는 값은 타입이 항상 string이고,
-    //없으면 해당 컨드롤러에 맵핑되지 않기 때문에 (xx || default) 부분은 무쓸모...
+    //없으면 해당 컨드롤러에 맵핑되지 않기 때문에 ${xx || default} 부분은 무쓸모...
   }
 }
