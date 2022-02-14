@@ -14,7 +14,7 @@ export class UsersController {
   @ApiOperation({ summary: 'Create User', description: '사용자를 생성한다.' })
   @ApiBody({ type: User })
   @ApiResponse({ status: 201, description: 'User Created', type: User })
-  @ApiResponse({ status: 400, description: 'Body Format Wrong' })
+  @ApiResponse({ status: 400, description: 'Wrong Body Format' })
   @Post()
   async create(@Body() createUserDto: CreateUserDto): Promise<User> {
     return this.usersService.create(createUserDto);
@@ -23,13 +23,9 @@ export class UsersController {
   @ApiOperation({ summary: 'Retrieve User', description: '비밀번호 제외.' })
   @ApiParam({ name: 'name', description: 'the name of user' })
   @ApiResponse({ status: 200, description: 'Found User', type: User })
-  @ApiResponse({ status: 400, description: 'User not found' })
+  @ApiResponse({ status: 404, description: 'User Not Found' })
   @Get(':name')
   async findOne(@Param('name') name: string): Promise<User> {
-    const user = this.usersService.findOne(name);
-    if (!user) {
-      throw new NotFoundException('Not Found the User');
-    }
-    return user;
+    return this.usersService.findOne(name);
   }
 }

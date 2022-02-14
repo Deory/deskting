@@ -1,5 +1,5 @@
 // eslint-disable-next-line prettier/prettier
-import { Controller, Get, Post, Body, Put, Param, Delete } from '@nestjs/common';
+import { Controller, Get, Post, Body, Param } from '@nestjs/common';
 import { SchoolsService } from './schools.service';
 import { CreateSchoolDto } from './dto/create-school.dto';
 import { MongoIdValidationPipe } from 'src/util/validation.pipe';
@@ -19,7 +19,7 @@ export class SchoolsController {
   })
   @ApiBody({ type: School })
   @ApiResponse({ status: 201, description: 'School Created', type: School })
-  @ApiResponse({ status: 400, description: 'Body Format Wrong' })
+  @ApiResponse({ status: 400, description: 'Wrong Body Format' })
   @Post()
   create(@Body() createSchoolDto: CreateSchoolDto): Promise<School> {
     return this.schoolsService.create(createSchoolDto);

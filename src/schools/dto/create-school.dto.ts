@@ -1,4 +1,4 @@
 export class CreateSchoolDto {
-  region: string;
-  name: string;
+  readonly region: string;
+  readonly name: string;
 }

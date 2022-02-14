@@ -11,6 +11,7 @@ export function setupSwagger(app: INestApplication): void {
     .setVersion('1.0')
     .addTag('users')
     .addTag('schools')
+    .addTag('news')
     .addTag('newsfeeds')
     .build();
 
