@@ -1,4 +1,5 @@
-import { Injectable } from '@nestjs/common';
+// eslint-disable-next-line prettier/prettier
+import { Injectable, NotFoundException } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
 import { Model, ObjectId } from 'mongoose';
 import { CreateSchoolDto } from './dto/create-school.dto';
@@ -20,7 +21,11 @@ export class SchoolsService {
   }
 
   async findOne(id: ObjectId): Promise<School> {
-    return this.schoolModel.findById(id).exec();
+    const school = this.schoolModel.findById(id).exec();
+    if (!school) {
+      throw new NotFoundException('School Not Found');
+    }
+    return school;
   }
 
   // update(id: ObjectId, updateSchoolDto: UpdateSchoolDto) {
