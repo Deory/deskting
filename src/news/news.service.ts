@@ -1,4 +1,4 @@
-import { Injectable, NotFoundException } from '@nestjs/common';
+import { ConsoleLogger, Injectable, NotFoundException } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
 import { Model, ObjectId } from 'mongoose';
 import { SchoolsService } from 'src/schools/schools.service';
@@ -25,7 +25,9 @@ export class NewsService {
   }
 
   async findOne(schoolId: ObjectId, id: ObjectId): Promise<News> {
-    const news = this.newsModel.findOne({ school: schoolId, _id: id });
+    const news = await this.newsModel
+      .findOne({ school: schoolId, _id: id })
+      .exec();
     if (!news) {
       throw new NotFoundException('News Not Found');
     }
@@ -37,10 +39,11 @@ export class NewsService {
     id: ObjectId,
     updateNewsDto: UpdateNewsDto,
   ): Promise<News> {
-    const updatedNews = this.newsModel.findOneAndUpdate(
-      { school: schoolId, _id: id },
-      updateNewsDto,
-    );
+    const updatedNews = await this.newsModel
+      .findOneAndUpdate({ school: schoolId, _id: id }, updateNewsDto, {
+        new: true,
+      })
+      .exec();
     if (!updatedNews) {
       throw new NotFoundException('News Not Found');
     }
@@ -48,10 +51,9 @@ export class NewsService {
   }
 
   async remove(schoolId: ObjectId, id: ObjectId): Promise<News> {
-    const deletedPost = this.newsModel.findOneAndDelete({
-      school: schoolId,
-      _id: id,
-    });
+    const deletedPost = await this.newsModel
+      .findOneAndDelete({ school: schoolId, _id: id })
+      .exec();
     if (!deletedPost) {
       throw new NotFoundException('News Not Found');
     }

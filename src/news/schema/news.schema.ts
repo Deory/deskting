@@ -12,6 +12,7 @@ export class News {
   @ApiProperty({
     description: '학교 ID',
     readOnly: true,
+    required: false,
   })
   school: string;
 
@@ -19,6 +20,7 @@ export class News {
   @ApiProperty({
     description: '작성자 ID',
     readOnly: true,
+    required: false,
   })
   author: string;
 
@@ -33,12 +35,14 @@ export class News {
   @ApiProperty({
     description: '소식 생성 일짜',
     readOnly: true,
+    required: false,
   })
   createdAt: Date;
 
   @ApiProperty({
     description: '소식 갱신 일짜',
     readOnly: true,
+    required: false,
   })
   updatedAt: Date;
 }
