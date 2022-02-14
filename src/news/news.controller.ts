@@ -7,7 +7,7 @@ import { ObjectId } from 'mongoose';
 // eslint-disable-next-line prettier/prettier
 import { ApiTags, ApiOperation, ApiParam, ApiBody, ApiResponse } from '@nestjs/swagger';
 import { News } from './schema/news.schema';
-import { MongoIdValidationPipe } from 'src/util/validation.pipe';
+import { MongoIdValidationPipe } from 'src/util/mongoValidation.pipe';
 
 @ApiTags('news')
 @ApiResponse({ status: 400, description: 'Wrong ID format' })

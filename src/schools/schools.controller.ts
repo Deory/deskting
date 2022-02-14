@@ -2,7 +2,7 @@
 import { Controller, Get, Post, Body, Param } from '@nestjs/common';
 import { SchoolsService } from './schools.service';
 import { CreateSchoolDto } from './dto/create-school.dto';
-import { MongoIdValidationPipe } from 'src/util/validation.pipe';
+import { MongoIdValidationPipe } from 'src/util/mongoValidation.pipe';
 import { ObjectId } from 'mongoose';
 // eslint-disable-next-line prettier/prettier
 import { ApiTags, ApiOperation, ApiParam, ApiBody, ApiResponse } from '@nestjs/swagger';
