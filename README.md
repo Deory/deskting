@@ -6,7 +6,7 @@ Deskting project wanna be part of Classting
 1. Clone git project => <br>
   `# git clone https://github.com/Deory/deskting.git`
 2. Install dependencies => <br>
-  `# yarn add`
+  `# yarn`
 3. Start deskting => <br>
   `# yarn run start`
 
