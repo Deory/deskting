@@ -21,7 +21,7 @@ export class SchoolsService {
   }
 
   async findOne(id: ObjectId): Promise<School> {
-    const school = this.schoolModel.findById(id).exec();
+    const school = await this.schoolModel.findById(id).exec();
     if (!school) {
       throw new NotFoundException('School Not Found');
     }

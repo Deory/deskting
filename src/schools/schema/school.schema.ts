@@ -4,7 +4,9 @@ import { ApiProperty } from '@nestjs/swagger';
 
 export type SchoolDocument = School & Document;
 
-@Schema()
+@Schema({
+  autoIndex: true,
+})
 export class School {
   @Prop({ required: true })
   @ApiProperty({
@@ -24,3 +26,4 @@ export class School {
 }
 
 export const SchoolSchema = SchemaFactory.createForClass(School);
+SchoolSchema.index({ region: 1, name: 1 }, { unique: true });

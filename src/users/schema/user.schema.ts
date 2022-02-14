@@ -4,14 +4,22 @@ import { ApiProperty } from '@nestjs/swagger';
 
 export type UserDocument = User & Document;
 
-@Schema()
+@Schema({
+  autoIndex: true,
+})
 export class User {
-  @Prop({ required: true })
+  @Prop({
+    required: false,
+    type: String,
+    enum: ['admin', 'student'],
+    default: 'student',
+  })
   @ApiProperty({
     example: 'admin',
     description: '사용자 타입',
     enum: ['admin', 'student'],
-    required: true,
+    default: 'student',
+    required: false,
   })
   type: USER_TYPE;
 
@@ -20,7 +28,7 @@ export class User {
     description: '사용자 이름',
     required: true,
   })
-  @Prop({ required: true })
+  @Prop({ required: true, unique: true })
   name: string;
 
   @ApiProperty({
@@ -30,6 +38,14 @@ export class User {
   })
   @Prop({ required: true, select: false })
   password: string;
+
+  @ApiProperty({
+    description: 'admin: 관리중인 학교, student: 구독중인 학교',
+    readOnly: true,
+    required: false,
+  })
+  @Prop()
+  schools: [string];
 }
 
 export const UserSchema = SchemaFactory.createForClass(User);
